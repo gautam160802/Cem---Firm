@@ -8,6 +8,26 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Contact from "./components/Contact";
+// import WhatsAppButton from "./components/WhatsAppButton";
+import FloatingContactButtons from "./components/FloatingContactButtons";
+import { useEffect } from "react";
+
+function ThemeToggle() {
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", dark);
+  }, [dark]);
+
+  return (
+    <button
+      onClick={() => setDark(!dark)}
+      className="fixed top-6 right-6 z-50 p-2 rounded-full bg-gray-200 dark:bg-gray-800"
+    >
+      {dark ? "🌙" : "☀️"}
+    </button>
+  );
+}
 
 function App() {
   const [user, setUser] = useState(null);
@@ -34,6 +54,8 @@ function App() {
       <Testimonials />
       <Contact />
       <Footer />
+      {/* <WhatsAppButton /> */}
+      <FloatingContactButtons />
     </div>
   );
 }
