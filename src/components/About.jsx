@@ -2,15 +2,16 @@ import React from "react";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-          About Us
+    <section id="about" className="py-20 px-6 bg-gray-100" data-aos="fade-up">
+      <div className="max-w-5xl mx-auto text-center">
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">
+          About Suryacem
         </h2>
-        <p className="mt-4 text-gray-600 text-lg">
-          Magnum is a leading cement manufacturer committed to quality,
-          sustainability, and innovation. Our cement powers infrastructure
-          across the country.
+        <p className="text-gray-600 text-lg">
+          Magnum is a trusted name in construction, providing top-grade cement
+          to power strong, lasting buildings. Our commitment to quality ensures
+          durability and strength, empowering infrastructure and development
+          across regions.
         </p>
       </div>
     </section>

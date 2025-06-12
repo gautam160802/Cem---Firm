@@ -1,22 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Products from "./components/Products";
-import Contact from "./components/Contact";
+import Testimonials from "./components/Testimonials";
 import Footer from "./components/Footer";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
-export default function App() {
+function App() {
+  const [user, setUser] = useState(null);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+
   return (
-    <>
-      <Navbar />
-      <div className="pt-16">
-        <Hero />
-        <About />
-        <Products />
-        <Contact />
-        <Footer />
-      </div>
-    </>
+    <div className="font-sans">
+      <Navbar
+        user={user}
+        onLogin={() => setShowLogin(true)}
+        onRegister={() => setShowRegister(true)}
+        onLogout={() => setUser(null)}
+      />
+
+      {showLogin && (
+        <Login onClose={() => setShowLogin(false)} setUser={setUser} />
+      )}
+      {showRegister && <Register onClose={() => setShowRegister(false)} />}
+
+      <Hero />
+      <About />
+      <Products />
+      <Testimonials />
+      <Footer />
+    </div>
   );
 }
+
+export default App;
