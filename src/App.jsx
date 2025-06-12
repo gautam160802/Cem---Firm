@@ -7,6 +7,7 @@ import Testimonials from "./components/Testimonials";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Contact from "./components/Contact";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -31,6 +32,7 @@ function App() {
       <About />
       <Products />
       <Testimonials />
+      <Contact />
       <Footer />
     </div>
   );

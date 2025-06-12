@@ -4,7 +4,7 @@ export default function Navbar({ user, onLogin, onRegister, onLogout }) {
   return (
     <nav className="bg-white shadow sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="text-2xl font-bold text-gray-800">Suryacem</div>
+        <div className="text-2xl font-bold text-gray-800">Magnum</div>
         <div className="space-x-4">
           <a href="#about" className="text-gray-600 hover:text-gray-900">
             About

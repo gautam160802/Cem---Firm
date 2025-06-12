@@ -12,7 +12,7 @@ export default function Hero() {
         data-aos="zoom-in"
       >
         <h1 className="text-4xl md:text-6xl font-bold">
-          Build Strong with Suryacem
+          Build Strong with Magnum
         </h1>
         <p className="mt-4 text-xl">Premium cement for durable constructions</p>
         <button className="mt-6 px-6 py-3 bg-yellow-500 hover:bg-yellow-600 rounded-full text-lg font-medium">
