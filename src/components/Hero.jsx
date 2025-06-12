@@ -4,6 +4,7 @@ import React from "react";
 export default function Hero() {
   return (
     <section
+      id="home"
       className="bg-cover bg-center h-screen flex items-center justify-center text-white"
       style={{ backgroundImage: "url('/hero.jpg')" }}
     >

@@ -1,16 +1,24 @@
+import React from "react";
+
 export default function Products() {
   return (
-    <section className="py-16 px-6 text-center">
-      <h2 className="text-3xl font-bold mb-6">Our Products</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {["OPC 53 Grade", "PPC Cement", "PSC Cement"].map((product, index) => (
-          <div key={index} className="bg-white shadow-lg p-6 rounded-lg">
-            <h3 className="text-xl font-semibold mb-2">{product}</h3>
-            <p>
-              High strength and reliability for all your construction needs.
-            </p>
-          </div>
-        ))}
+    <section id="products" className="py-20">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800">
+          Our Products
+        </h2>
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+          {["Premium Cement", "Rapid Hardening", "Eco Cement"].map(
+            (product, idx) => (
+              <div key={idx} className="p-6 shadow-md rounded bg-white">
+                <h3 className="text-xl font-semibold">{product}</h3>
+                <p className="mt-2 text-gray-600">
+                  High strength and durability for all your construction needs.
+                </p>
+              </div>
+            )
+          )}
+        </div>
       </div>
     </section>
   );
