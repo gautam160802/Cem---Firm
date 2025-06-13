@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import locationData from "../assets/indiaStatesCities.json";
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
+import locationData from "../assets/indiaStatesCities.json";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -14,46 +14,54 @@ export default function Contact() {
     message: "",
   });
 
-  const [districts, setDistricts] = useState([]);
-  const [cities, setCities] = useState([]);
+  const [filteredDistricts, setFilteredDistricts] = useState([]);
+  const [filteredCities, setFilteredCities] = useState([]);
 
-  // Update districts on state change
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // When state changes, update districts
   useEffect(() => {
-    const selectedState = locationData.find((s) => s.state === form.state);
+    const selectedState = locationData.find(
+      (item) => item.state === form.state
+    );
     if (selectedState) {
-      setDistricts(selectedState.districts.map((d) => d.name));
+      setFilteredDistricts(selectedState.districts.map((d) => d.name));
     } else {
-      setDistricts([]);
+      setFilteredDistricts([]);
     }
     setForm((prev) => ({ ...prev, district: "", city: "" }));
+    setFilteredCities([]);
   }, [form.state]);
 
-  // Update cities on district change
+  // When district changes, update cities
   useEffect(() => {
-    const selectedState = locationData.find((s) => s.state === form.state);
+    const selectedState = locationData.find(
+      (item) => item.state === form.state
+    );
     const selectedDistrict = selectedState?.districts.find(
       (d) => d.name === form.district
     );
     if (selectedDistrict) {
-      setCities(selectedDistrict.cities);
+      setFilteredCities(selectedDistrict.cities);
     } else {
-      setCities([]);
+      setFilteredCities([]);
     }
     setForm((prev) => ({ ...prev, city: "" }));
-  }, [form.district]);
+  }, [form.district, form.state]);
 
-  const handleChange = (e) => {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await addDoc(collection(db, "enquiries"), form);
-      alert("✅ Your enquiry has been submitted!");
+      alert("✅ Enquiry submitted successfully!");
       setForm({
         name: "",
         phone: "",
@@ -63,18 +71,16 @@ export default function Contact() {
         city: "",
         message: "",
       });
-      setDistricts([]);
-      setCities([]);
-    } catch (error) {
-      console.error("Error adding enquiry:", error);
-      alert("❌ Something went wrong. Please try again.");
+    } catch (err) {
+      console.error("Error submitting enquiry", err);
+      alert("❌ Something went wrong.");
     }
   };
 
   return (
     <section className="px-6 py-12 bg-gray-100 dark:bg-gray-900" id="contact">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-        {/* Info & Map */}
+        {/* Contact Info */}
         <div>
           <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">
             📍 Contact Us
@@ -95,15 +101,13 @@ export default function Contact() {
             src="https://www.google.com/maps?q=Lucknow+UP&output=embed"
             width="100%"
             height="250"
-            style={{ border: 0 }}
-            allowFullScreen=""
+            className="rounded border-0"
             loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="rounded"
+            allowFullScreen
           ></iframe>
         </div>
 
-        {/* Form */}
+        {/* Enquiry Form */}
         <div className="bg-white dark:bg-gray-800 p-6 rounded shadow">
           <h3 className="text-2xl font-semibold mb-4 dark:text-white">
             Enquiry Form
@@ -112,8 +116,8 @@ export default function Contact() {
             <input
               type="text"
               name="name"
-              onChange={handleChange}
               value={form.name}
+              onChange={handleChange}
               placeholder="Your Name"
               className="w-full p-2 border rounded"
               required
@@ -121,8 +125,8 @@ export default function Contact() {
             <input
               type="tel"
               name="phone"
-              onChange={handleChange}
               value={form.phone}
+              onChange={handleChange}
               placeholder="Phone Number"
               className="w-full p-2 border rounded"
               required
@@ -130,8 +134,8 @@ export default function Contact() {
             <input
               type="email"
               name="email"
-              onChange={handleChange}
               value={form.email}
+              onChange={handleChange}
               placeholder="Email"
               className="w-full p-2 border rounded"
               required
@@ -145,9 +149,9 @@ export default function Contact() {
               required
             >
               <option value="">Select State</option>
-              {locationData.map((s, i) => (
-                <option key={i} value={s.state}>
-                  {s.state}
+              {locationData.map((stateObj, index) => (
+                <option key={index} value={stateObj.state}>
+                  {stateObj.state}
                 </option>
               ))}
             </select>
@@ -160,9 +164,9 @@ export default function Contact() {
               required
             >
               <option value="">Select District</option>
-              {districts.map((d, i) => (
-                <option key={i} value={d}>
-                  {d}
+              {filteredDistricts.map((district, index) => (
+                <option key={index} value={district}>
+                  {district}
                 </option>
               ))}
             </select>
@@ -175,9 +179,9 @@ export default function Contact() {
               required
             >
               <option value="">Select City</option>
-              {cities.map((c, i) => (
-                <option key={i} value={c}>
-                  {c}
+              {filteredCities.map((city, index) => (
+                <option key={index} value={city}>
+                  {city}
                 </option>
               ))}
             </select>
