@@ -14,8 +14,8 @@ export default function Contact() {
     message: "",
   });
 
-  const [filteredDistricts, setFilteredDistricts] = useState([]);
-  const [filteredCities, setFilteredCities] = useState([]);
+  const [districts, setDistricts] = useState([]);
+  const [cities, setCities] = useState([]);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -26,34 +26,30 @@ export default function Contact() {
     }));
   };
 
-  // When state changes, update districts
+  // When state changes
   useEffect(() => {
     const selectedState = locationData.find(
-      (item) => item.state === form.state
+      (stateObj) => stateObj.state === form.state
     );
+
     if (selectedState) {
-      setFilteredDistricts(selectedState.districts.map((d) => d.name));
-    } else {
-      setFilteredDistricts([]);
+      setDistricts(selectedState.districts || []);
+      setForm((prev) => ({ ...prev, district: "", city: "" }));
+      setCities([]);
     }
-    setForm((prev) => ({ ...prev, district: "", city: "" }));
-    setFilteredCities([]);
   }, [form.state]);
 
-  // When district changes, update cities
+  // When district changes
   useEffect(() => {
     const selectedState = locationData.find(
-      (item) => item.state === form.state
+      (stateObj) => stateObj.state === form.state
     );
-    const selectedDistrict = selectedState?.districts.find(
-      (d) => d.name === form.district
-    );
-    if (selectedDistrict) {
-      setFilteredCities(selectedDistrict.cities);
-    } else {
-      setFilteredCities([]);
+
+    if (selectedState?.cities && form.district) {
+      const matchedCities = selectedState.cities[form.district] || [];
+      setCities(matchedCities);
+      setForm((prev) => ({ ...prev, city: "" }));
     }
-    setForm((prev) => ({ ...prev, city: "" }));
   }, [form.district, form.state]);
 
   // Handle form submission
@@ -73,21 +69,21 @@ export default function Contact() {
       });
     } catch (err) {
       console.error("Error submitting enquiry", err);
-      alert("❌ Something went wrong.");
+      alert("❌ Failed to submit enquiry.");
     }
   };
 
   return (
     <section className="px-6 py-12 bg-gray-100 dark:bg-gray-900" id="contact">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-        {/* Contact Info */}
+        {/* Left Contact Info */}
         <div>
           <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">
             📍 Contact Us
           </h2>
           <p className="text-gray-700 dark:text-gray-300 mb-4">
             <strong>Address:</strong> Magnum Cement Factory, Near Transport
-            Nagar, Lucknow, Uttar Pradesh – 226012
+            Nagar, Lucknow, UP – 226012
           </p>
           <p className="text-gray-700 dark:text-gray-300 mb-2">
             <strong>Phone:</strong> +91-9876543210
@@ -95,9 +91,8 @@ export default function Contact() {
           <p className="text-gray-700 dark:text-gray-300 mb-6">
             <strong>Email:</strong> info@ravikant123.com
           </p>
-
           <iframe
-            title="Map to Magnum"
+            title="Magnum Cement Map"
             src="https://www.google.com/maps?q=Lucknow+UP&output=embed"
             width="100%"
             height="250"
@@ -107,7 +102,7 @@ export default function Contact() {
           ></iframe>
         </div>
 
-        {/* Enquiry Form */}
+        {/* Right Enquiry Form */}
         <div className="bg-white dark:bg-gray-800 p-6 rounded shadow">
           <h3 className="text-2xl font-semibold mb-4 dark:text-white">
             Enquiry Form
@@ -164,7 +159,7 @@ export default function Contact() {
               required
             >
               <option value="">Select District</option>
-              {filteredDistricts.map((district, index) => (
+              {districts.map((district, index) => (
                 <option key={index} value={district}>
                   {district}
                 </option>
@@ -179,7 +174,7 @@ export default function Contact() {
               required
             >
               <option value="">Select City</option>
-              {filteredCities.map((city, index) => (
+              {cities.map((city, index) => (
                 <option key={index} value={city}>
                   {city}
                 </option>
