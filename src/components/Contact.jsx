@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
+import indiaData from "../assets/indiaStatesCities.json";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -9,45 +9,19 @@ export default function Contact() {
     phone: "",
     email: "",
     state: "",
-    district: "",
     city: "",
     message: "",
   });
 
-  const [data, setData] = useState({
-    states: [],
-    districts: [],
-    cities: [],
-  });
+  const [cities, setCities] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://cdn.jsdelivr.net/npm/indian-states-cities@1.0.0/india.json")
-      .then((res) => {
-        setData((prev) => ({ ...prev, states: res.data }));
-      });
-  }, []);
-
-  useEffect(() => {
-    const selected = data.states.find((s) => s.state === form.state);
-    if (selected) {
-      setData((prev) => ({
-        ...prev,
-        districts: selected.districts || [],
-        cities: [],
-      }));
-      setForm((prev) => ({ ...prev, district: "", city: "" }));
+    const selectedState = indiaData.find((s) => s.state === form.state);
+    if (selectedState) {
+      setCities(selectedState.cities);
+      setForm((prev) => ({ ...prev, city: "" }));
     }
   }, [form.state]);
-
-  useEffect(() => {
-    if (form.district) {
-      setData((prev) => ({
-        ...prev,
-        cities: [form.district + " City"],
-      }));
-    }
-  }, [form.district]);
 
   const handleChange = (e) => {
     setForm((prev) => ({
@@ -60,33 +34,32 @@ export default function Contact() {
     e.preventDefault();
     try {
       await addDoc(collection(db, "enquiries"), form);
-      alert("✅ Your enquiry has been submitted!");
+      alert("✅ Enquiry submitted!");
       setForm({
         name: "",
         phone: "",
         email: "",
         state: "",
-        district: "",
         city: "",
         message: "",
       });
+      setCities([]);
     } catch (error) {
-      console.error("Error adding enquiry:", error);
-      alert("❌ Something went wrong. Please try again.");
+      console.error("Submission failed:", error);
+      alert("❌ Please try again later.");
     }
   };
 
   return (
     <section className="px-6 py-12 bg-gray-100 dark:bg-gray-900" id="contact">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-        {/* Contact Info & Map */}
         <div>
           <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">
             📍 Contact Us
           </h2>
           <p className="text-gray-700 dark:text-gray-300 mb-4">
-            <strong>Address:</strong> Magnum Cement Factory, Near Transport
-            Nagar, Lucknow, Uttar Pradesh – 226012
+            <strong>Address:</strong> Magnum Cement Factory, Transport Nagar,
+            Lucknow, UP – 226012
           </p>
           <p className="text-gray-700 dark:text-gray-300 mb-2">
             <strong>Phone:</strong> +91-9876543210
@@ -103,12 +76,10 @@ export default function Contact() {
             style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
             className="rounded"
           ></iframe>
         </div>
 
-        {/* Updated Enquiry Form */}
         <div className="bg-white dark:bg-gray-800 p-6 rounded shadow">
           <h3 className="text-2xl font-semibold mb-4 dark:text-white">
             Enquiry Form
@@ -117,6 +88,7 @@ export default function Contact() {
             <input
               type="text"
               name="name"
+              value={form.name}
               onChange={handleChange}
               placeholder="Your Name"
               className="w-full p-2 border rounded"
@@ -125,6 +97,7 @@ export default function Contact() {
             <input
               type="tel"
               name="phone"
+              value={form.phone}
               onChange={handleChange}
               placeholder="Phone Number"
               className="w-full p-2 border rounded"
@@ -133,6 +106,7 @@ export default function Contact() {
             <input
               type="email"
               name="email"
+              value={form.email}
               onChange={handleChange}
               placeholder="Email"
               className="w-full p-2 border rounded"
@@ -147,24 +121,9 @@ export default function Contact() {
               required
             >
               <option value="">Select State</option>
-              {data.states.map((s, i) => (
+              {indiaData.map((s, i) => (
                 <option key={i} value={s.state}>
                   {s.state}
-                </option>
-              ))}
-            </select>
-
-            <select
-              name="district"
-              value={form.district}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            >
-              <option value="">Select District</option>
-              {data.districts.map((d, i) => (
-                <option key={i} value={d}>
-                  {d}
                 </option>
               ))}
             </select>
@@ -175,9 +134,10 @@ export default function Contact() {
               onChange={handleChange}
               className="w-full p-2 border rounded"
               required
+              disabled={!cities.length}
             >
               <option value="">Select City</option>
-              {data.cities.map((c, i) => (
+              {cities.map((c, i) => (
                 <option key={i} value={c}>
                   {c}
                 </option>
@@ -186,6 +146,7 @@ export default function Contact() {
 
             <textarea
               name="message"
+              value={form.message}
               onChange={handleChange}
               placeholder="Your Message"
               className="w-full p-2 border rounded"

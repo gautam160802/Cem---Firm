@@ -1,0 +1,14 @@
+[
+  {
+    "state": "Uttar Pradesh",
+    "cities": ["Lucknow", "Kanpur", "Agra"]
+  },
+  {
+    "state": "Bihar",
+    "cities": ["Patna", "Gaya", "Bhagalpur"]
+  },
+  {
+    "state": "Maharashtra",
+    "cities": ["Mumbai", "Pune", "Nagpur"]
+  }
+]
