@@ -1,18 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Products from "./components/Products";
-import Testimonials from "./components/Testimonials";
-import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Contact from "./components/Contact";
-// import WhatsAppButton from "./components/WhatsAppButton";
-import FloatingContactButtons from "./components/FloatingContactButtons";
-import { useEffect } from "react";
-import ProductCMS from "./components/productCMS";
-// import EnquiryForm from "./components/EnquiryForm";
+
+import Home from "./pages/Home";
+import Admin from "./pages/Admin";
 
 function ThemeToggle() {
   const [dark, setDark] = useState(false);
@@ -38,6 +32,8 @@ function App() {
 
   return (
     <div className="font-sans">
+      <ThemeToggle />
+
       <Navbar
         user={user}
         onLogin={() => setShowLogin(true)}
@@ -45,21 +41,18 @@ function App() {
         onLogout={() => setUser(null)}
       />
 
+      {/* Show popup login/register modals */}
       {showLogin && (
         <Login onClose={() => setShowLogin(false)} setUser={setUser} />
       )}
       {showRegister && <Register onClose={() => setShowRegister(false)} />}
 
-      <Hero />
-      <About />
-      <Products />
-      <Testimonials />
-      <Contact />
-      <ProductCMS />
-      {/* <WhatsAppButton /> */}
-      <FloatingContactButtons />
-      {/* <EnquiryForm /> */}
-      <Footer />
+      {/* Page Routes */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </div>
   );
 }
