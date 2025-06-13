@@ -11,6 +11,7 @@ import Contact from "./components/Contact";
 // import WhatsAppButton from "./components/WhatsAppButton";
 import FloatingContactButtons from "./components/FloatingContactButtons";
 import { useEffect } from "react";
+import ProductCMS from "./components/productCMS";
 // import EnquiryForm from "./components/EnquiryForm";
 
 function ThemeToggle() {
@@ -54,7 +55,7 @@ function App() {
       <Products />
       <Testimonials />
       <Contact />
-
+      <ProductCMS />
       {/* <WhatsAppButton /> */}
       <FloatingContactButtons />
       {/* <EnquiryForm /> */}
