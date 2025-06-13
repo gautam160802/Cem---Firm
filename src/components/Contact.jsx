@@ -1,205 +1,224 @@
-import React, { useEffect, useState } from "react";
-import { db } from "../firebase";
-import { collection, addDoc } from "firebase/firestore";
-import locationData from "../assets/indiaStatesCities.json";
+import React, { useState, useEffect } from "react";
+import indiaData from "../assets/indiaStatesCities.json";
+import { db } from "../firebase"; // Adjust path to your Firebase setup
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 
-export default function Contact() {
-  const [form, setForm] = useState({
+const Contact = () => {
+  const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
     state: "",
     district: "",
     city: "",
+    pincode: "",
     message: "",
   });
 
   const [districts, setDistricts] = useState([]);
   const [cities, setCities] = useState([]);
+  const [successMsg, setSuccessMsg] = useState("");
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // When state changes
   useEffect(() => {
-    const selectedState = locationData.find(
-      (stateObj) => stateObj.state === form.state
-    );
+    const stateData = indiaData.find((item) => item.state === formData.state);
+    setDistricts(stateData ? stateData.districts : []);
+    setFormData((prev) => ({ ...prev, district: "", city: "" }));
+    setCities([]);
+  }, [formData.state]);
 
-    if (selectedState) {
-      setDistricts(selectedState.districts || []);
-      setForm((prev) => ({ ...prev, district: "", city: "" }));
-      setCities([]);
-    }
-  }, [form.state]);
-
-  // When district changes
   useEffect(() => {
-    const selectedState = locationData.find(
-      (stateObj) => stateObj.state === form.state
-    );
+    const stateData = indiaData.find((item) => item.state === formData.state);
+    const cityData = stateData?.cities?.[formData.district] || [];
+    setCities(cityData);
+    setFormData((prev) => ({ ...prev, city: "" }));
+  }, [formData.district]);
 
-    if (selectedState?.cities && form.district) {
-      const matchedCities = selectedState.cities[form.district] || [];
-      setCities(matchedCities);
-      setForm((prev) => ({ ...prev, city: "" }));
-    }
-  }, [form.district, form.state]);
-
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      await addDoc(collection(db, "enquiries"), form);
-      alert("✅ Enquiry submitted successfully!");
-      setForm({
+      await addDoc(collection(db, "enquiries"), {
+        ...formData,
+        createdAt: Timestamp.now(),
+      });
+      setSuccessMsg("🎉 Your enquiry has been sent successfully!");
+      setFormData({
         name: "",
         phone: "",
         email: "",
         state: "",
         district: "",
         city: "",
+        pincode: "",
         message: "",
       });
-    } catch (err) {
-      console.error("Error submitting enquiry", err);
-      alert("❌ Failed to submit enquiry.");
+      setTimeout(() => setSuccessMsg(""), 4000);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("❌ Something went wrong. Please try again later.");
     }
   };
 
   return (
-    <section className="px-6 py-12 bg-gray-100 dark:bg-gray-900" id="contact">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-        {/* Left Contact Info */}
+    <div className="bg-white py-12 px-4 sm:px-6 lg:px-16">
+      <h2 className="text-4xl font-bold text-center mb-10 text-gray-800">
+        Contact Us
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+        {/* Left: Contact Info + Map */}
         <div>
-          <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">
-            📍 Contact Us
-          </h2>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            <strong>Address:</strong> Magnum Cement Factory, Near Transport
-            Nagar, Lucknow, UP – 226012
-          </p>
-          <p className="text-gray-700 dark:text-gray-300 mb-2">
-            <strong>Phone:</strong> +91-9876543210
-          </p>
-          <p className="text-gray-700 dark:text-gray-300 mb-6">
-            <strong>Email:</strong> info@ravikant123.com
-          </p>
-          <iframe
-            title="Magnum Cement Map"
-            src="https://www.google.com/maps?q=Lucknow+UP&output=embed"
-            width="100%"
-            height="250"
-            className="rounded border-0"
-            loading="lazy"
-            allowFullScreen
-          ></iframe>
-        </div>
-
-        {/* Right Enquiry Form */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded shadow">
-          <h3 className="text-2xl font-semibold mb-4 dark:text-white">
-            Enquiry Form
+          <h3 className="text-2xl font-semibold text-gray-700 mb-4">
+            Get in Touch
           </h3>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="Your Name"
-              className="w-full p-2 border rounded"
-              required
-            />
-            <input
-              type="tel"
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-              placeholder="Phone Number"
-              className="w-full p-2 border rounded"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="Email"
-              className="w-full p-2 border rounded"
-              required
-            />
+          <p className="mb-4 text-gray-600">
+            We are happy to help you with your cement needs across Uttar Pradesh
+            and Bihar. Please fill out the form and we’ll get back to you soon.
+          </p>
 
-            <select
-              name="state"
-              value={form.state}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            >
-              <option value="">Select State</option>
-              {locationData.map((stateObj, index) => (
-                <option key={index} value={stateObj.state}>
-                  {stateObj.state}
-                </option>
-              ))}
-            </select>
+          <div className="space-y-3 text-gray-600 mb-6">
+            <p>
+              <strong>Phone:</strong> +91-9876543210
+            </p>
+            <p>
+              <strong>Email:</strong> info@gautamcement.com
+            </p>
+            <p>
+              <strong>Address:</strong> Gomti Nagar, Lucknow, UP
+            </p>
+          </div>
 
-            <select
-              name="district"
-              value={form.district}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            >
-              <option value="">Select District</option>
-              {districts.map((district, index) => (
-                <option key={index} value={district}>
-                  {district}
-                </option>
-              ))}
-            </select>
-
-            <select
-              name="city"
-              value={form.city}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            >
-              <option value="">Select City</option>
-              {cities.map((city, index) => (
-                <option key={index} value={city}>
-                  {city}
-                </option>
-              ))}
-            </select>
-
-            <textarea
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              placeholder="Your Message"
-              className="w-full p-2 border rounded"
-              rows="4"
-              required
-            />
-
-            <button
-              type="submit"
-              className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded w-full"
-            >
-              Submit Enquiry
-            </button>
-          </form>
+          {/* Embedded Map */}
+          <iframe
+            title="Lucknow Map"
+            src="https://maps.google.com/maps?q=lucknow&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            className="w-full h-64 border rounded shadow-md"
+            allowFullScreen=""
+            loading="lazy"
+          />
         </div>
+
+        {/* Right: Enquiry Form */}
+        <form
+          onSubmit={handleSubmit}
+          className="bg-gray-50 p-6 rounded-lg shadow-md space-y-4"
+        >
+          <h3 className="text-xl font-bold text-gray-700 mb-4 text-center">
+            📝 Enquiry Form
+          </h3>
+
+          {successMsg && (
+            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded">
+              {successMsg}
+            </div>
+          )}
+
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Your Name"
+            className="w-full px-4 py-2 border rounded"
+            required
+          />
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="Phone Number"
+            className="w-full px-4 py-2 border rounded"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email Address"
+            className="w-full px-4 py-2 border rounded"
+          />
+
+          {/* Dropdowns */}
+          <select
+            name="state"
+            value={formData.state}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded"
+            required
+          >
+            <option value="">Select State</option>
+            {indiaData.map((item, idx) => (
+              <option key={idx} value={item.state}>
+                {item.state}
+              </option>
+            ))}
+          </select>
+
+          <select
+            name="district"
+            value={formData.district}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded"
+            required
+          >
+            <option value="">Select District</option>
+            {districts.map((district, idx) => (
+              <option key={idx} value={district}>
+                {district}
+              </option>
+            ))}
+          </select>
+
+          <select
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded"
+            required
+          >
+            <option value="">Select City</option>
+            {cities.map((city, idx) => (
+              <option key={idx} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+
+          <input
+            type="text"
+            name="pincode"
+            value={formData.pincode}
+            onChange={handleChange}
+            placeholder="Pincode"
+            className="w-full px-4 py-2 border rounded"
+            required
+          />
+
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            rows={3}
+            placeholder="Your Message"
+            className="w-full px-4 py-2 border rounded"
+          />
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+          >
+            Submit Enquiry
+          </button>
+        </form>
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default Contact;
