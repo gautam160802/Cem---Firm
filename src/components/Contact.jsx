@@ -88,7 +88,8 @@ const Contact = () => {
               <strong>Email:</strong> info@gautamcement.com
             </p>
             <p>
-              <strong>Address:</strong> Gomti Nagar, Lucknow, UP
+              <strong>Address:</strong> PLOT NO.111, TIWARIGANJ , INDUSTRIAL
+              AREA, AYODHYA ROAD , LUCKNOW 226028 (U.P)
             </p>
           </div>
 

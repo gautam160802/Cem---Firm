@@ -9,7 +9,7 @@ import { FaStar } from "react-icons/fa";
 const testimonials = [
   {
     name: "Gautam Kumar",
-    text: "We’ve used Magnum Cement for 5+ years. Strength and durability always impress!",
+    text: "Magnum Cement delivered beyond expectations. My clients praised the strength and finish.",
     image: "https://randomuser.me/api/portraits/men/75.jpg",
     company: "Kumar Constructions",
     logo: "https://cdn-icons-png.flaticon.com/512/5968/5968705.png",
@@ -17,7 +17,7 @@ const testimonials = [
   },
   {
     name: "Ravi Kant Singh",
-    text: "The quality and support from Magnum are unmatched. Our go-to brand every time!",
+    text: "Quality and reliability define Magnum. Always on time and never a complaint.",
     image: "https://randomuser.me/api/portraits/men/32.jpg",
     company: "Singh Infrastructure",
     logo: "https://cdn-icons-png.flaticon.com/512/619/619034.png",
@@ -25,7 +25,7 @@ const testimonials = [
   },
   {
     name: "Pooja Sharma",
-    text: "Reliable and fast delivery. Magnum has always supported our deadlines!",
+    text: "Used for multiple housing projects. Magnum’s consistency and price make it unbeatable.",
     image: "https://randomuser.me/api/portraits/women/44.jpg",
     company: "Sharma Developers",
     logo: "https://cdn-icons-png.flaticon.com/512/1042/1042344.png",
@@ -33,7 +33,7 @@ const testimonials = [
   },
   {
     name: "Akash Mehta",
-    text: "Our clients love the durability of Magnum Cement. It makes our job easier!",
+    text: "Every structure we’ve built using Magnum has stood the test of time. Highly recommended.",
     image: "https://randomuser.me/api/portraits/men/55.jpg",
     company: "Mehta Builders",
     logo: "https://cdn-icons-png.flaticon.com/512/921/921347.png",
@@ -41,7 +41,7 @@ const testimonials = [
   },
   {
     name: "Nisha Verma",
-    text: "We trust Magnum for all our residential projects. Great quality and value.",
+    text: "Magnum’s cement mix has the perfect balance. It’s our top pick for residential projects.",
     image: "https://randomuser.me/api/portraits/women/68.jpg",
     company: "Verma & Co.",
     logo: "https://cdn-icons-png.flaticon.com/512/3523/3523885.png",
@@ -60,15 +60,15 @@ export default function Testimonials() {
           💬 What Our Clients Say
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-12">
-          Hear directly from engineers, contractors, and customers who trust
-          Magnum Cement for every project.
+          Trusted by builders and contractors nationwide — here's what they have
+          to say about Magnum Cement.
         </p>
 
         <Swiper
           modules={[Pagination, Autoplay]}
           spaceBetween={40}
           slidesPerView={1}
-          loop={testimonials.length > 2}
+          loop={testimonials.length > 1}
           autoplay={{ delay: 4000, disableOnInteraction: false }}
           pagination={{ clickable: true }}
           className="w-full"
@@ -90,7 +90,6 @@ export default function Testimonials() {
                   />
                 )}
 
-                {/* Star Ratings */}
                 <div className="flex justify-center mb-2">
                   {[...Array(t.rating)].map((_, index) => (
                     <FaStar key={index} className="text-yellow-500 text-lg" />
@@ -105,9 +104,7 @@ export default function Testimonials() {
                   {t.name}
                 </h4>
                 <div className="flex items-center justify-center gap-2 mt-2">
-                  {t.logo && (
-                    <img src={t.logo} alt="company logo" className="w-6 h-6" />
-                  )}
+                  <img src={t.logo} alt="company logo" className="w-6 h-6" />
                   <span className="text-sm text-gray-600 dark:text-gray-400">
                     {t.company}
                   </span>
@@ -116,13 +113,6 @@ export default function Testimonials() {
             </SwiperSlide>
           ))}
         </Swiper>
-
-        <button
-          className="mt-10 px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-white font-medium rounded-full shadow transition"
-          onClick={() => alert("Review form coming soon!")}
-        >
-          📝 Write Your Review
-        </button>
       </div>
     </section>
   );
