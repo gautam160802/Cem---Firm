@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion as _motion } from "framer-motion";
 
 export default function About() {
   return (
@@ -16,7 +16,7 @@ export default function About() {
         />
 
         {/* Content */}
-        <motion.div
+        <_motion.div
           className="space-y-6"
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -44,7 +44,7 @@ export default function About() {
             From homes to highways, our cement is at the core of countless
             projects — empowering progress, region by region.
           </p>
-        </motion.div>
+        </_motion.div>
       </div>
     </section>
   );
