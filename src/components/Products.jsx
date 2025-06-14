@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 const dummyProducts = [
   {
@@ -36,35 +37,44 @@ export default function Products() {
       className="py-20 px-6 bg-gray-100 dark:bg-gray-900"
       data-aos="fade-up"
     >
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-10">
-          🧱 Our Products
+      <div className="max-w-6xl mx-auto text-center">
+        <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-3">
+          🧱 Our Premium Products
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {products.map((product) => (
-            <div
+        <p className="text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-12">
+          Choose from our top-grade cement options designed to ensure strength,
+          durability, and faster setting for every kind of project.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+          {products.map((product, index) => (
+            <motion.div
               key={product.id}
-              className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300"
+              className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-2xl transform hover:-translate-y-2 transition duration-300"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
             >
               <div className="relative">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-52 object-cover"
+                  className="w-full h-56 object-cover"
                 />
-                <span className="absolute top-2 right-2 bg-yellow-500 text-white px-3 py-1 text-sm rounded-full shadow-lg">
+                <span className="absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-4 py-1 text-sm rounded-full shadow-md">
                   {product.price}
                 </span>
               </div>
-              <div className="p-4">
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-yellow-400">
+              <div className="p-5">
+                <h3 className="text-2xl font-semibold text-gray-800 dark:text-yellow-400 mb-2">
                   {product.name}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mt-2">
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
                   {product.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
