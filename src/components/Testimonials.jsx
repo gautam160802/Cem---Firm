@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import { motion } from "framer-motion";
+import { motion as _motion } from "framer-motion";
 import { FaStar } from "react-icons/fa";
 
 const testimonials = [
@@ -75,7 +75,7 @@ export default function Testimonials() {
         >
           {testimonials.map((t, i) => (
             <SwiperSlide key={`testimonial-${i}`}>
-              <motion.div
+              <_motion.div
                 className="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-xl text-center max-w-xl mx-auto"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -109,7 +109,7 @@ export default function Testimonials() {
                     {t.company}
                   </span>
                 </div>
-              </motion.div>
+              </_motion.div>
             </SwiperSlide>
           ))}
         </Swiper>

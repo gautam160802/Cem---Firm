@@ -1,58 +1,61 @@
+// src/components/Footer.jsx
 import React from "react";
 
-export default function Footer() {
+const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white pt-10 pb-6 mt-20">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-        {/* Brand Info */}
+    <footer className="bg-gray-900 text-white py-10 px-5">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         <div>
-          <h3 className="text-xl font-bold mb-2">Magnum Cement</h3>
-          <p className="text-gray-400">Building Trust, One Bag at a Time.</p>
+          <h3 className="font-bold text-lg mb-2">Gautam Cement</h3>
+          <p>
+            Quality cement distributor for UP & Bihar. Trusted by 100+ builders.
+          </p>
         </div>
-
-        {/* Quick Links */}
         <div>
-          <h4 className="text-lg font-semibold mb-3">Quick Links</h4>
-          <ul className="space-y-2 text-gray-300">
+          <h4 className="font-semibold mb-2">Quick Links</h4>
+          <ul className="space-y-1">
             <li>
-              <a href="#about" className="hover:text-white">
-                About Us
+              <a href="#about" className="hover:text-yellow-400">
+                About
               </a>
             </li>
             <li>
-              <a href="#products" className="hover:text-white">
+              <a href="#products" className="hover:text-yellow-400">
                 Products
               </a>
             </li>
             <li>
-              <a href="#contact" className="hover:text-white">
+              <a href="#contact" className="hover:text-yellow-400">
                 Contact
               </a>
             </li>
           </ul>
         </div>
-
-        {/* Social Icons */}
         <div>
-          <h4 className="text-lg font-semibold mb-3">Follow Us</h4>
-          <div className="flex justify-center md:justify-start space-x-4">
+          <h4 className="font-semibold mb-2">Location</h4>
+          <p>Lucknow, Uttar Pradesh</p>
+          <p>Bihar Office: Patna</p>
+        </div>
+        <div>
+          <h4 className="font-semibold mb-2">Connect</h4>
+          <div className="flex space-x-4">
             <a href="#" className="hover:text-yellow-400">
               Facebook
             </a>
             <a href="#" className="hover:text-yellow-400">
-              Instagram
+              WhatsApp
             </a>
             <a href="#" className="hover:text-yellow-400">
-              LinkedIn
+              Instagram
             </a>
           </div>
         </div>
       </div>
-
-      {/* Bottom Footer */}
-      <div className="mt-10 border-t border-gray-700 pt-4 text-center text-gray-400 text-sm">
-        &copy; {new Date().getFullYear()} Magnum Cement. All rights reserved.
-      </div>
+      <p className="text-center mt-10 text-sm text-gray-400">
+        &copy; {new Date().getFullYear()} Gautam Cement. All rights reserved.
+      </p>
     </footer>
   );
-}
+};
+
+export default Footer;

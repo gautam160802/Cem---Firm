@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion as _motion } from "framer-motion";
 
 const dummyProducts = [
   {
@@ -48,7 +48,7 @@ export default function Products() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
           {products.map((product, index) => (
-            <motion.div
+            <_motion.div
               key={product.id}
               className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-2xl transform hover:-translate-y-2 transition duration-300"
               initial={{ opacity: 0, y: 30 }}
@@ -74,7 +74,7 @@ export default function Products() {
                   {product.description}
                 </p>
               </div>
-            </motion.div>
+            </_motion.div>
           ))}
         </div>
       </div>
