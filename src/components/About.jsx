@@ -6,7 +6,7 @@ export default function About() {
     <section id="about" className="py-20 bg-gray-100" data-aos="fade-up">
       <div className="max-w-6xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-10 items-center">
         {/* Image with motion */}
-        <motion.img
+        <_motion.img
           src="/factory.jpg"
           alt="Magnum Cement Factory"
           className="rounded-lg shadow-lg w-full object-cover"
