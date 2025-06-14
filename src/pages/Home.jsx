@@ -16,7 +16,6 @@ export default function Home() {
       <About />
       <Products />
       <Testimonials />
-
       <CTASection />
       <Contact />
       <FloatingContactButtons />
