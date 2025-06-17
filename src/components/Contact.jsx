@@ -1,225 +1,110 @@
-import React, { useState, useEffect } from "react";
-import indiaData from "../assets/indiaStatesCities.json";
-import { db } from "../firebase"; // Adjust path to your Firebase setup
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { useState } from "react";
+import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
+import { motion as _motion } from "framer-motion";
+import emailjs from "emailjs-com"; // install: npm install emailjs-com
 
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    state: "",
-    district: "",
-    city: "",
-    pincode: "",
-    message: "",
-  });
+export default function Contact() {
+  // Form state
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
-  const [districts, setDistricts] = useState([]);
-  const [cities, setCities] = useState([]);
-  const [successMsg, setSuccessMsg] = useState("");
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  useEffect(() => {
-    const stateData = indiaData.find((item) => item.state === formData.state);
-    setDistricts(stateData ? stateData.districts : []);
-    setFormData((prev) => ({ ...prev, district: "", city: "" }));
-    setCities([]);
-  }, [formData.state]);
-
-  useEffect(() => {
-    const stateData = indiaData.find((item) => item.state === formData.state);
-    const cityData = stateData?.cities?.[formData.district] || [];
-    setCities(cityData);
-    setFormData((prev) => ({ ...prev, city: "" }));
-  }, [formData.district]);
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      await addDoc(collection(db, "enquiries"), {
-        ...formData,
-        createdAt: Timestamp.now(),
+    // Call emailjs here to send email
+    emailjs
+      .send(
+        "YOUR_SERVICE_ID",
+        "YOUR_TEMPLATE_ID",
+        {
+          name: name,
+          email: email,
+          message: message,
+        },
+        "YOUR_USER_ID"
+      )
+      .then(() => {
+        alert("Message sent successfully!");
+        setName("");
+        setEmail("");
+        setMessage("");
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+        alert("Something went wrong!");
       });
-      setSuccessMsg("🎉 Your enquiry has been sent successfully!");
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        state: "",
-        district: "",
-        city: "",
-        pincode: "",
-        message: "",
-      });
-      setTimeout(() => setSuccessMsg(""), 4000);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("❌ Something went wrong. Please try again later.");
-    }
   };
 
   return (
-    <div className="bg-white py-12 px-4 sm:px-6 lg:px-16">
-      <h2 className="text-4xl font-bold text-center mb-10 text-gray-800">
+    <motion.section
+      id="contact"
+      className="p-10 bg-white text-center"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+      viewport={{ once: true }}
+    >
+      <h2 className="text-3xl font-bold font-serif text-gray-800 mb-2">
         Contact Us
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        {/* Left: Contact Info + Map */}
-        <div>
-          <h3 className="text-2xl font-semibold text-gray-700 mb-4">
-            Get in Touch
-          </h3>
-          <p className="mb-4 text-gray-600">
-            We are happy to help you with your cement needs across Uttar Pradesh
-            and Bihar. Please fill out the form and we’ll get back to you soon.
-          </p>
+      <div className="h-1 w-16 bg-yellow-600 rounded mx-auto mb-4"></div>
 
-          <div className="space-y-3 text-gray-600 mb-6">
-            <p>
-              <strong>Phone:</strong> +91-9876543210
-            </p>
-            <p>
-              <strong>Email:</strong> info@gautamcement.com
-            </p>
-            <p>
-              <strong>Address:</strong> PLOT NO.111, TIWARIGANJ , INDUSTRIAL
-              AREA, AYODHYA ROAD , LUCKNOW 226028 (U.P)
-            </p>
-          </div>
-
-          {/* Embedded Map */}
-          <iframe
-            title="Lucknow Map"
-            src="https://maps.google.com/maps?q=lucknow&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            className="w-full h-64 border rounded shadow-md"
-            allowFullScreen=""
-            loading="lazy"
-          />
-        </div>
-
-        {/* Right: Enquiry Form */}
-        <form
-          onSubmit={handleSubmit}
-          className="bg-gray-50 p-6 rounded-lg shadow-md space-y-4"
-        >
-          <h3 className="text-xl font-bold text-gray-700 mb-4 text-center">
-            📝 Enquiry Form
-          </h3>
-
-          {successMsg && (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded">
-              {successMsg}
-            </div>
-          )}
-
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Your Name"
-            className="w-full px-4 py-2 border rounded"
-            required
-          />
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="Phone Number"
-            className="w-full px-4 py-2 border rounded"
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Email Address"
-            className="w-full px-4 py-2 border rounded"
-          />
-
-          {/* Dropdowns */}
-          <select
-            name="state"
-            value={formData.state}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded"
-            required
+      {/* Contact Info */}
+      <div className="space-y-4 text-gray-600 text-lg mb-8">
+        <p className="flex items-center justify-center gap-2">
+          <MdEmail className="text-yellow-600" />
+          <a
+            href="mailto:abc.cement@gmail.com"
+            className="text-blue-600 underline"
           >
-            <option value="">Select State</option>
-            {indiaData.map((item, idx) => (
-              <option key={idx} value={item.state}>
-                {item.state}
-              </option>
-            ))}
-          </select>
-
-          <select
-            name="district"
-            value={formData.district}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded"
-            required
-          >
-            <option value="">Select District</option>
-            {districts.map((district, idx) => (
-              <option key={idx} value={district}>
-                {district}
-              </option>
-            ))}
-          </select>
-
-          <select
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded"
-            required
-          >
-            <option value="">Select City</option>
-            {cities.map((city, idx) => (
-              <option key={idx} value={city}>
-                {city}
-              </option>
-            ))}
-          </select>
-
-          <input
-            type="text"
-            name="pincode"
-            value={formData.pincode}
-            onChange={handleChange}
-            placeholder="Pincode"
-            className="w-full px-4 py-2 border rounded"
-            required
-          />
-
-          <textarea
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            rows={3}
-            placeholder="Your Message"
-            className="w-full px-4 py-2 border rounded"
-          />
-
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-          >
-            Submit Enquiry
-          </button>
-        </form>
+            abc.cement@gmail.com
+          </a>
+        </p>
+        <p className="flex items-center justify-center gap-2">
+          <MdPhone className="text-yellow-600" /> +91 9876543210
+        </p>
+        <p className="flex items-center justify-center gap-2">
+          <MdLocationOn className="text-yellow-600" /> Patna, Bihar
+        </p>
       </div>
-    </div>
-  );
-};
 
-export default Contact;
+      {/* Enquiry Form */}
+      <form onSubmit={handleSubmit} className="max-w-xl mx-auto mt-4 space-y-4">
+        <input
+          type="text"
+          placeholder="Your Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full p-3 border rounded"
+          required
+        />
+
+        <input
+          type="email"
+          placeholder="Your Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full p-3 border rounded"
+          required
+        />
+
+        <textarea
+          placeholder="Your Message"
+          rows="4"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          className="w-full p-3 border rounded"
+          required
+        ></textarea>
+
+        <button
+          type="submit"
+          className="bg-yellow-600 text-white px-6 py-2 rounded hover:bg-yellow-700"
+        >
+          Send Message
+        </button>
+      </form>
+    </motion.section>
+  );
+}
