@@ -37,7 +37,7 @@ export default function Contact() {
   };
 
   return (
-    <motion.section
+    <_motion.section
       id="contact"
       className="p-10 bg-white text-center"
       initial={{ opacity: 0, y: 50 }}
@@ -105,6 +105,6 @@ export default function Contact() {
           Send Message
         </button>
       </form>
-    </motion.section>
+    </_motion.section>
   );
 }
