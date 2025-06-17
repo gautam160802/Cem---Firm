@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import indiaData from "../assets/indiaStatesCities.json";
-import { db } from "../firebase"; // Adjust path to your Firebase setup
+import { db } from "../firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
+import emailjs from "emailjs-com"; // <== Added EmailJS
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -42,10 +43,29 @@ const Contact = () => {
     e.preventDefault();
 
     try {
+      // Store data in Firebase Firestore
       await addDoc(collection(db, "enquiries"), {
         ...formData,
         createdAt: Timestamp.now(),
       });
+
+      // Send email using EmailJS
+      await emailjs.send(
+        "service_b0ersvj", // <-- your actual SERVICE ID
+        "template_8rbwdsr", // <-- your actual TEMPLATE ID
+        {
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          state: formData.state,
+          district: formData.district,
+          city: formData.city,
+          pincode: formData.pincode,
+          message: formData.message,
+        },
+        "XmgCc8xO0IdU1SJ7A" // <-- your actual Public Key (USER ID)
+      );
+
       setSuccessMsg("🎉 Your enquiry has been sent successfully!");
       setFormData({
         name: "",
@@ -88,12 +108,11 @@ const Contact = () => {
               <strong>Email:</strong> info@gautamcement.com
             </p>
             <p>
-              <strong>Address:</strong> PLOT NO.111, TIWARIGANJ , INDUSTRIAL
-              AREA, AYODHYA ROAD , LUCKNOW 226028 (U.P)
+              <strong>Address:</strong> PLOT NO.111, TIWARIGANJ, INDUSTRIAL
+              AREA, AYODHYA ROAD, LUCKNOW 226028 (U.P)
             </p>
           </div>
 
-          {/* Embedded Map */}
           <iframe
             title="Lucknow Map"
             src="https://maps.google.com/maps?q=lucknow&t=&z=13&ie=UTF8&iwloc=&output=embed"
@@ -145,7 +164,6 @@ const Contact = () => {
             className="w-full px-4 py-2 border rounded"
           />
 
-          {/* Dropdowns */}
           <select
             name="state"
             value={formData.state}
