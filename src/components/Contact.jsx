@@ -132,8 +132,10 @@ const Contact = () => {
           </h3>
 
           {successMsg && (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded">
-              {successMsg}
+            <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+              <div className="bg-green-600 text-white px-6 py-3 rounded shadow-lg text-lg flex items-center gap-2 animate-slide-down">
+                ✅ {successMsg}
+              </div>
             </div>
           )}
 
@@ -194,20 +196,15 @@ const Contact = () => {
             ))}
           </select>
 
-          <select
+          <input
+            type="text"
             name="city"
             value={formData.city}
             onChange={handleChange}
+            placeholder="City"
             className="w-full px-4 py-2 border rounded"
             required
-          >
-            <option value="">Select City</option>
-            {cities.map((city, idx) => (
-              <option key={idx} value={city}>
-                {city}
-              </option>
-            ))}
-          </select>
+          />
 
           <input
             type="text"
