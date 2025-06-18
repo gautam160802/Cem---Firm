@@ -22,10 +22,10 @@ export default function Hero() {
       >
         <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
           Build Strong. Build Trust. <br />
-          <span className="text-yellow-400">With Magnum Cement</span>
+          <span className="text-yellow-400">With Magnum Lime Wash</span>
         </h1>
         <p className="mt-6 text-lg md:text-xl text-gray-200">
-          High-quality cement trusted by professionals across India. From
+          High-quality Lime Wash trusted by professionals across India. From
           foundation to finish — we support your vision.
         </p>
 

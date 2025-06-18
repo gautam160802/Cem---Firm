@@ -9,7 +9,7 @@ import { FaStar } from "react-icons/fa";
 const testimonials = [
   {
     name: "Gautam Kumar",
-    text: "Magnum Cement delivered beyond expectations. My clients praised the strength and finish.",
+    text: "Magnum Lime Wash delivered beyond expectations. My clients praised the strength and finish.",
     image: "https://randomuser.me/api/portraits/men/75.jpg",
     company: "Kumar Constructions",
     logo: "https://cdn-icons-png.flaticon.com/512/5968/5968705.png",
@@ -41,7 +41,7 @@ const testimonials = [
   },
   {
     name: "Nisha Verma",
-    text: "Magnum’s cement mix has the perfect balance. It’s our top pick for residential projects.",
+    text: "Magnum’s Lime Wash mix has the perfect balance. It’s our top pick for residential projects.",
     image: "https://randomuser.me/api/portraits/women/68.jpg",
     company: "Verma & Co.",
     logo: "https://cdn-icons-png.flaticon.com/512/3523/3523885.png",
@@ -61,7 +61,7 @@ export default function Testimonials() {
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-12">
           Trusted by builders and contractors nationwide — here's what they have
-          to say about Magnum Cement.
+          to say about Magnum Lime Wash.
         </p>
 
         <Swiper

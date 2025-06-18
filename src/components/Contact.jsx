@@ -105,7 +105,7 @@ const Contact = () => {
               <strong>Phone:</strong> +91-9876543210
             </p>
             <p>
-              <strong>Email:</strong> info@gautamcement.com
+              <strong>Email:</strong> info@gautamLime Wash.com
             </p>
             <p>
               <strong>Address:</strong> PLOT NO.111, TIWARIGANJ, INDUSTRIAL

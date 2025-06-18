@@ -7,11 +7,11 @@ const CTASection = () => {
     <section className="cta-section">
       <div className="max-w-4xl mx-auto px-4">
         <h2 className="animate-smooth-bounce">
-          Need Quality Cement for Your Project?
+          Need Quality Lime Wash for Your Project?
         </h2>
         <p>
-          Get the best cement at the best price. Serving all districts of UP &
-          Bihar.
+          Get the best Lime Wash at the best price. Serving all districts of UP
+          & Bihar.
         </p>
         <a
           href="#contact"

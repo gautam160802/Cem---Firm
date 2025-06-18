@@ -42,8 +42,8 @@ export default function Products() {
           🧱 Our Premium Products
         </h2>
         <p className="text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-12">
-          Choose from our top-grade cement options designed to ensure strength,
-          durability, and faster setting for every kind of project.
+          Choose from our top-grade Lime Wash options designed to ensure
+          strength, durability, and faster setting for every kind of project.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">

@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
+import { motion as _motion } from "framer-motion";
 
 const applications = [
   { title: "Cement Wash", image: "/images/cement-wash.jpg" },
@@ -15,8 +16,14 @@ const applications = [
 
 const Applications = () => {
   return (
-    <section className="py-16 bg-gray-100">
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
+    <_motion.section
+      className="py-20 bg-gradient-to-r from-yellow-100 to-white"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+    >
+      <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-14 font-serif">
         Applications of Our Products
       </h2>
 
@@ -24,7 +31,7 @@ const Applications = () => {
         slidesPerView={1}
         spaceBetween={20}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 2500, disableOnInteraction: false }}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
         loop={true}
         breakpoints={{
           640: { slidesPerView: 1 },
@@ -32,24 +39,36 @@ const Applications = () => {
           1024: { slidesPerView: 3 },
         }}
         modules={[Pagination, Autoplay]}
-        className="max-w-6xl mx-auto"
+        className="max-w-6xl mx-auto px-4"
       >
         {applications.map((app, index) => (
           <SwiperSlide key={index}>
-            <div className="bg-white rounded shadow p-4 text-center">
+            <_motion.div
+              whileHover={{ scale: 1.05 }}
+              className="bg-white rounded-lg shadow-lg p-4 text-center transition-all duration-300 cursor-pointer hover:shadow-2xl border hover:border-yellow-500"
+            >
               <img
                 src={app.image}
                 alt={app.title}
                 className="w-full h-60 object-cover rounded mb-4"
               />
-              <h3 className="text-lg font-semibold text-gray-700">
+              <h3 className="text-xl font-semibold text-gray-700">
                 {app.title}
               </h3>
-            </div>
+            </_motion.div>
           </SwiperSlide>
         ))}
       </Swiper>
-    </section>
+
+      <div className="flex justify-center mt-12">
+        <a
+          href="#contact"
+          className="bg-yellow-600 text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-yellow-700 transition duration-300 shadow-lg"
+        >
+          Get a Quote
+        </a>
+      </div>
+    </_motion.section>
   );
 };
 

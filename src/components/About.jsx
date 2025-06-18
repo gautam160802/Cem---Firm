@@ -8,7 +8,7 @@ export default function About() {
         {/* Image with motion */}
         <_motion.img
           src="/factory.jpg"
-          alt="Magnum Cement Factory"
+          alt="Magnum Lime Wash"
           className="rounded-lg shadow-lg w-full object-cover"
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -26,11 +26,11 @@ export default function About() {
             About <span className="text-yellow-500">Magnum</span>
           </h2>
           <p className="text-gray-700 text-lg leading-relaxed">
-            <strong>Magnum Cement</strong> is a trusted name in construction,
+            <strong>Magnum Lime Wash</strong> is a trusted name in construction,
             delivering
             <span className="text-yellow-600 font-medium">
               {" "}
-              top-grade cement{" "}
+              top-grade Lime Wash{" "}
             </span>
             engineered for strength and longevity. Backed by quality assurance
             and modern infrastructure, we help build

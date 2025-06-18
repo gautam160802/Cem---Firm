@@ -6,9 +6,10 @@ const Footer = () => {
     <footer className="bg-gray-900 text-white py-10 px-5">
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         <div>
-          <h3 className="font-bold text-lg mb-2">Gautam Cement</h3>
+          <h3 className="font-bold text-lg mb-2">Magnum Lime Wash</h3>
           <p>
-            Quality cement distributor for UP & Bihar. Trusted by 100+ builders.
+            Quality Lime Wash distributor for UP & Bihar. Trusted by 100+
+            builders.
           </p>
         </div>
         <div>
@@ -52,7 +53,7 @@ const Footer = () => {
         </div>
       </div>
       <p className="text-center mt-10 text-sm text-gray-400">
-        &copy; {new Date().getFullYear()} Gautam Cement. All rights reserved.
+        &copy; {new Date().getFullYear()} Magnum Lime Wash. All rights reserved.
       </p>
     </footer>
   );
