@@ -7,6 +7,7 @@ import Register from "./components/Register";
 
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
+import AdminDashboard from "./components/AdminDashboard";
 
 function ThemeToggle() {
   const [dark, setDark] = useState(false);
@@ -33,6 +34,10 @@ function App() {
   return (
     <div className="font-sans">
       <ThemeToggle />
+
+      <div className="font-sans bg-white text-gray-800">
+        <AdminDashboard />
+      </div>
 
       <Navbar
         user={user}
