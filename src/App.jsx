@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-
+import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
+import AdminLogin from "./components/AdminLogin";
 
 function ThemeToggle() {
   const [dark, setDark] = useState(false);
@@ -49,7 +50,15 @@ function App() {
       {/* Page Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <Admin />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </div>
