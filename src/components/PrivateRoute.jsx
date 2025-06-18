@@ -1,10 +1,10 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { auth } from "../firebase";
+import { useAuth } from "../context/AuthContext";
 
 const PrivateRoute = ({ children }) => {
-  const user = auth.currentUser;
-  return user ? children : <Navigate to="/admin-login" />;
+  const { currentUser } = useAuth();
+  return currentUser ? children : <Navigate to="/admin-login" />;
 };
 
 export default PrivateRoute;
