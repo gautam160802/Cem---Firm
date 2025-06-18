@@ -8,6 +8,7 @@ import Contact from "../components/Contact";
 import FloatingContactButtons from "../components/FloatingContactButtons";
 import Footer from "../components/Footer";
 import CTASection from "../components/CTASection";
+import Applications from "../components/Application";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Hero />
       <About />
       <Products />
+      <Applications />
       <Testimonials />
       <CTASection />
       <Contact />
