@@ -1,83 +1,97 @@
-import React, { useState } from "react";
-import { motion as _motion } from "framer-motion";
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination, Autoplay } from "swiper/modules";
+import { motion } from "framer-motion";
 
-const dummyProducts = [
+const products = [
   {
     id: 1,
-    name: "Magnum PPC",
-    description: "Perfect for general construction with extra durability.",
-    price: "₹320 / bag",
-    image:
-      "https://images.pexels.com/photos/28359708/pexels-photo-28359708.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1",
+    name: "Rose Putty",
+    description:
+      "High-quality rose putty providing smooth finish & strong bonding for walls and ceilings.",
+    price: "₹450 / bag",
+    image: "/images/rose-putty.jpg",
   },
   {
     id: 2,
-    name: "Magnum OPC",
-    description: "High strength for major structural projects.",
-    price: "₹350 / bag",
-    image:
-      "https://images.pexels.com/photos/4710933/pexels-photo-4710933.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1",
+    name: "Lemon Putty",
+    description:
+      "Premium lemon putty with excellent whiteness and surface coverage for interior walls.",
+    price: "₹480 / bag",
+    image: "/images/lemon-putty.jpg",
   },
   {
     id: 3,
-    name: "Magnum RapidSet",
-    description: "Fast-setting cement for quick repairs and small projects.",
-    price: "₹375 / bag",
-    image:
-      "https://images.pexels.com/photos/7193962/pexels-photo-7193962.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1",
+    name: "Sandalwood Putty",
+    description:
+      "Smooth finish sandalwood putty with extra durability for both interior & exterior surfaces.",
+    price: "₹500 / bag",
+    image: "/images/sandalwood-putty.jpg",
   },
 ];
 
 export default function Products() {
-  const [products] = useState(dummyProducts);
-
   return (
-    <section
+    <motion.section
       id="products"
-      className="py-20 px-6 bg-gray-100 dark:bg-gray-900"
-      data-aos="fade-up"
+      className="py-20 px-4 bg-gradient-to-r from-yellow-50 to-white"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
     >
-      <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-3">
+      <div className="max-w-6xl mx-auto text-center mb-12">
+        <h2 className="text-4xl font-bold text-gray-800 mb-4 font-serif">
           🧱 Our Premium Products
         </h2>
-        <p className="text-gray-600 dark:text-gray-300 max-w-xl mx-auto mb-12">
-          Choose from our top-grade Lime Wash options designed to ensure
-          strength, durability, and faster setting for every kind of project.
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          Explore our finest grade of putty products engineered for beautiful
+          finish, durability, and long-lasting performance.
         </p>
+      </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-          {products.map((product, index) => (
-            <_motion.div
-              key={product.id}
-              className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-2xl transform hover:-translate-y-2 transition duration-300"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={20}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        loop={true}
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
+        modules={[Pagination, Autoplay]}
+        className="max-w-6xl mx-auto"
+      >
+        {products.map((product) => (
+          <SwiperSlide key={product.id}>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 border hover:border-yellow-500"
             >
               <div className="relative">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-56 object-cover"
+                  className="w-full h-64 object-cover"
                 />
                 <span className="absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-4 py-1 text-sm rounded-full shadow-md">
                   {product.price}
                 </span>
               </div>
-              <div className="p-5">
-                <h3 className="text-2xl font-semibold text-gray-800 dark:text-yellow-400 mb-2">
+              <div className="p-6 text-center">
+                <h3 className="text-2xl font-semibold text-gray-800 mb-2">
                   {product.name}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  {product.description}
-                </p>
+                <p className="text-gray-600 text-sm">{product.description}</p>
               </div>
-            </_motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
+            </motion.div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </motion.section>
   );
 }
