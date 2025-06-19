@@ -6,22 +6,20 @@ export default function FloatingContactButtons() {
       name: "WhatsApp",
       icon: "/assets/whatsapp.png",
       url: "https://wa.me/919876543210",
+      bgColor: "bg-green-500",
     },
     {
       name: "Telegram",
       icon: "/assets/telegram.png",
       url: "https://t.me/yourusername",
+      bgColor: "bg-blue-500",
     },
     {
       name: "Call Us",
       icon: "/assets/phone.png",
       url: "tel:+919876543210",
+      bgColor: "bg-yellow-500",
     },
-    // {
-    //   name: "Email Us",
-    //   icon: "/assets/email.png",
-    //   url: "mailto:contact@suryacem.com",
-    // },
   ];
 
   return (
@@ -34,11 +32,11 @@ export default function FloatingContactButtons() {
           rel="noopener noreferrer"
           className="relative group"
         >
-          <img
-            src={btn.icon}
-            alt={btn.name}
-            className="w-12 h-12 hover:scale-110 transition-transform duration-200"
-          />
+          <div
+            className={`p-3 rounded-full shadow-lg ${btn.bgColor} hover:scale-110 transition-transform duration-300`}
+          >
+            <img src={btn.icon} alt={btn.name} className="w-6 h-6" />
+          </div>
           <span className="absolute right-14 top-1/2 -translate-y-1/2 bg-gray-800 text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {btn.name}
           </span>
