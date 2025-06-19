@@ -18,7 +18,7 @@ export default function Home() {
       <About />
       <WhyChooseUs />
       <Products />
-      <WhyChooseUs />
+
       <Applications />
 
       <Testimonials />
