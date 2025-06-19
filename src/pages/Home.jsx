@@ -7,7 +7,7 @@ import Testimonials from "../components/Testimonials";
 import Contact from "../components/Contact";
 import FloatingContactButtons from "../components/FloatingContactButtons";
 import Footer from "../components/Footer";
-import CTASection from "../components/CTASection";
+// import CTASection from "../components/CTASection";
 // import Applications from "../components/Application";
 import WhyChooseUs from "../components/WhyChooseUs";
 
@@ -22,7 +22,7 @@ export default function Home() {
       {/* <Applications /> */}
 
       <Testimonials />
-      <CTASection />
+      {/* <CTASection /> */}
       <Contact />
       <FloatingContactButtons />
       <Footer />

@@ -11,13 +11,25 @@ export default function Navbar() {
     <header className="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Brand */}
-        <div className="flex items-center gap-2">
-          <span className="text-3xl font-extrabold text-yellow-600 tracking-wide">
-            MAGNUM
-          </span>
-          <span className="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full text-xs font-semibold tracking-widest">
-            LIME WASH
-          </span>
+        <div className="flex flex-col items-start">
+          <div className="flex items-center gap-2">
+            <span className="text-3xl font-extrabold text-yellow-600 tracking-wide">
+              MAGNUM
+            </span>
+            <span className="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full text-xs font-semibold tracking-widest">
+              LIME WASH
+            </span>
+          </div>
+
+          {/* Tagline below perfectly aligned and colorful */}
+          <div className="mt-1">
+            <span
+              className="block text-xs sm:text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-500"
+              style={{ letterSpacing: "0.1em" }}
+            >
+              Superior White Bond
+            </span>
+          </div>
         </div>
 
         {/* Desktop Menu */}
@@ -40,7 +52,6 @@ export default function Navbar() {
               Applications
             </a>
           </li>
-
           <li>
             <a href="#whychooseus" className="hover:text-yellow-600 transition">
               Why Choose Us
@@ -81,6 +92,15 @@ export default function Navbar() {
                 className="hover:text-yellow-600 transition"
               >
                 Products
+              </a>
+            </li>
+            <li>
+              <a
+                href="#applications"
+                onClick={closeMenu}
+                className="hover:text-yellow-600 transition"
+              >
+                Applications
               </a>
             </li>
             <li>
