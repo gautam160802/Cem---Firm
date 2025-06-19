@@ -1,7 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { MdPhone } from "react-icons/md";
-import { FaWhatsapp, FaTelegram } from "react-icons/fa";
 
 const { div: MotionDiv } = motion;
 
@@ -15,28 +13,6 @@ export default function Hero() {
       {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-70 z-0" />
 
-      {/* Floating Contact Icons */}
-      <div className="absolute top-6 right-6 z-20 flex flex-col gap-4">
-        <a
-          href="tel:+919876543210"
-          className="bg-green-500 p-3 rounded-full shadow-lg hover:scale-110 transition"
-        >
-          <MdPhone className="text-white text-2xl" />
-        </a>
-        <a
-          href="https://wa.me/919876543210"
-          className="bg-green-600 p-3 rounded-full shadow-lg hover:scale-110 transition"
-        >
-          <FaWhatsapp className="text-white text-2xl" />
-        </a>
-        <a
-          href="https://t.me/yourTelegram"
-          className="bg-blue-500 p-3 rounded-full shadow-lg hover:scale-110 transition"
-        >
-          <FaTelegram className="text-white text-2xl" />
-        </a>
-      </div>
-
       {/* Hero content */}
       <MotionDiv
         initial={{ opacity: 0, y: 30 }}
@@ -49,7 +25,7 @@ export default function Hero() {
           <span className="text-yellow-400">With Magnum Lime Wash</span>
         </h1>
         <p className="mt-6 text-lg md:text-xl text-gray-200">
-          High-quality Lime Wash trusted by professionals across India. From
+          High-quality cement trusted by professionals across India. From
           foundation to finish — we support your vision.
         </p>
 
