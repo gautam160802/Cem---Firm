@@ -1,48 +1,55 @@
 import React from "react";
 
-export default function Navbar({ user, onLogin, onRegister, onLogout }) {
+export default function Navbar() {
   return (
-    <nav className="bg-white shadow sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="text-2xl font-bold text-gray-800">Magnum</div>
-        <div className="space-x-4">
-          <a href="#about" className="text-gray-600 hover:text-gray-900">
-            About
-          </a>
-          <a href="#products" className="text-gray-600 hover:text-gray-900">
-            Products
-          </a>
-          <a href="#testimonials" className="text-gray-600 hover:text-gray-900">
-            Testimonials
-          </a>
-          {user ? (
-            <>
-              <span className="text-green-600 font-semibold">{user.name}</span>
-              <button
-                onClick={onLogout}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                onClick={onLogin}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-              >
-                Login
-              </button>
-              <button
-                onClick={onRegister}
-                className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
-              >
-                Register
-              </button>
-            </>
-          )}
+    <header className="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50">
+      <nav className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+        {/* Brand Name */}
+        <div className="flex items-center gap-2">
+          <span className="text-3xl font-extrabold text-yellow-600 tracking-wide">
+            MAGNUM
+          </span>
+          <span className="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full text-xs font-semibold tracking-widest">
+            LIME WASH
+          </span>
         </div>
-      </div>
-    </nav>
+
+        {/* Navigation Links */}
+        <ul className="flex flex-wrap items-center gap-6 text-gray-700 font-medium text-base">
+          <li>
+            <a
+              href="#home"
+              className="hover:text-yellow-600 transition duration-300"
+            >
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              href="#products"
+              className="hover:text-yellow-600 transition duration-300"
+            >
+              Products
+            </a>
+          </li>
+          <li>
+            <a
+              href="#whychooseus"
+              className="hover:text-yellow-600 transition duration-300"
+            >
+              Why Choose Us
+            </a>
+          </li>
+          <li>
+            <a
+              href="#contact"
+              className="hover:text-yellow-600 transition duration-300"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
   );
 }
