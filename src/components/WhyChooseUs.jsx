@@ -2,14 +2,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
-import {
-  FaCogs,
-  FaShieldAlt,
-  FaHome,
-  FaCheckCircle,
-  FaIndustry,
-  FaLeaf,
-} from "react-icons/fa";
+import { FaCogs, FaShieldAlt, FaHome } from "react-icons/fa";
 
 const backgroundImages = [
   "/images/bg1.jpg",
@@ -21,7 +14,7 @@ const backgroundImages = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="relative h-[600px] w-full">
+    <section className="relative min-h-[500px] md:min-h-[600px] w-full overflow-hidden">
       {/* Background Slider */}
       <Swiper
         modules={[Autoplay]}
@@ -34,7 +27,7 @@ const WhyChooseUs = () => {
             <img
               src={img}
               alt={`Background ${index + 1}`}
-              className="w-full h-full object-cover brightness-75"
+              className="w-full h-full object-cover object-center brightness-75"
             />
           </SwiperSlide>
         ))}
