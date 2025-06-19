@@ -16,7 +16,7 @@ export default function Hero() {
         <img
           src={HeroBg}
           alt="Hero Background"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center filter blur-sm"
         />
         <div className="absolute inset-0 bg-black bg-opacity-60 z-0" />
       </div>
@@ -48,17 +48,17 @@ export default function Hero() {
       </MotionDiv>
 
       {/* Floating Product Image */}
-      <div className="absolute bottom-4 right-2 sm:right-10 z-20">
+      <div className="absolute bottom-0 right-0 sm:right-10 z-20 transform translate-y-1/4 sm:translate-y-1/4">
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="p-2 sm:p-3 bg-white/20 rounded-3xl shadow-xl"
+          initial={{ opacity: 0, scale: 0.7, y: 50 }}
+          animate={{ opacity: 1, scale: 1.1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.5 }}
+          className="p-3 bg-white/20 rounded-3xl shadow-xl backdrop-blur-md"
         >
           <img
             src={ProductImg}
             alt="Product Showcase"
-            className="w-24 sm:w-40 md:w-52 lg:w-60 object-contain transition-transform duration-500 hover:scale-105"
+            className="w-32 sm:w-48 md:w-60 lg:w-72 object-contain transition-transform duration-500 hover:scale-110"
           />
         </motion.div>
       </div>
