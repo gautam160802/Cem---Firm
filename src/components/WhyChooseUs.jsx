@@ -15,10 +15,10 @@ const backgroundImages = [
 const WhyChooseUs = () => {
   return (
     <section className="relative w-full overflow-hidden">
-      {/* Background Slider */}
       <Swiper
         modules={[Autoplay]}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        autoplay={{ delay: 1500, disableOnInteraction: false }}
+        speed={800}
         loop={true}
         className="absolute inset-0 z-0"
       >
@@ -33,7 +33,6 @@ const WhyChooseUs = () => {
         ))}
       </Swiper>
 
-      {/* Content Overlay */}
       <div className="relative bg-black/60 w-full py-16 px-4 text-white z-10">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-extrabold mb-10">
