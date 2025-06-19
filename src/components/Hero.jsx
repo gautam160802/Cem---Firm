@@ -16,7 +16,7 @@ export default function Hero() {
         <img
           src={HeroBg}
           alt="Hero Background"
-          className="w-full h-full object-cover object-center filter blur-sm"
+          className="w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-black bg-opacity-60 z-0" />
       </div>
