@@ -33,6 +33,15 @@ export default function Navbar() {
             </a>
           </li>
           <li>
+            <a
+              href="#applications"
+              className="hover:text-yellow-600 transition"
+            >
+              Applications
+            </a>
+          </li>
+
+          <li>
             <a href="#whychooseus" className="hover:text-yellow-600 transition">
               Why Choose Us
             </a>

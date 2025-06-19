@@ -8,7 +8,7 @@ import Contact from "../components/Contact";
 import FloatingContactButtons from "../components/FloatingContactButtons";
 import Footer from "../components/Footer";
 import CTASection from "../components/CTASection";
-import Applications from "../components/Application";
+// import Applications from "../components/Application";
 import WhyChooseUs from "../components/WhyChooseUs";
 
 export default function Home() {
@@ -19,7 +19,7 @@ export default function Home() {
       <WhyChooseUs />
       <Products />
 
-      <Applications />
+      {/* <Applications /> */}
 
       <Testimonials />
       <CTASection />
