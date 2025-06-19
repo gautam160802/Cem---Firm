@@ -16,9 +16,11 @@ export default function Home() {
     <>
       <Hero />
       <About />
-      <Products />
-      <Applications />
       <WhyChooseUs />
+      <Products />
+      <WhyChooseUs />
+      <Applications />
+
       <Testimonials />
       <CTASection />
       <Contact />
