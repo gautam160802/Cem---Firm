@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import { FiMenu, FiX } from "react-icons/fi";
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <header className="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        {/* Brand Name */}
+        {/* Brand */}
         <div className="flex items-center gap-2">
           <span className="text-3xl font-extrabold text-yellow-600 tracking-wide">
             MAGNUM
@@ -14,42 +20,81 @@ export default function Navbar() {
           </span>
         </div>
 
-        {/* Navigation Links */}
-        <ul className="flex flex-wrap items-center gap-6 text-gray-700 font-medium text-base">
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex gap-8 text-gray-700 font-medium text-base">
           <li>
-            <a
-              href="#home"
-              className="hover:text-yellow-600 transition duration-300"
-            >
+            <a href="#home" className="hover:text-yellow-600 transition">
               Home
             </a>
           </li>
           <li>
-            <a
-              href="#products"
-              className="hover:text-yellow-600 transition duration-300"
-            >
+            <a href="#products" className="hover:text-yellow-600 transition">
               Products
             </a>
           </li>
           <li>
-            <a
-              href="#whychooseus"
-              className="hover:text-yellow-600 transition duration-300"
-            >
+            <a href="#whychooseus" className="hover:text-yellow-600 transition">
               Why Choose Us
             </a>
           </li>
           <li>
-            <a
-              href="#contact"
-              className="hover:text-yellow-600 transition duration-300"
-            >
+            <a href="#contact" className="hover:text-yellow-600 transition">
               Contact
             </a>
           </li>
         </ul>
+
+        {/* Mobile Menu Icon */}
+        <div className="md:hidden">
+          <button onClick={toggleMenu} className="text-3xl text-yellow-600">
+            {menuOpen ? <FiX /> : <FiMenu />}
+          </button>
+        </div>
       </nav>
+
+      {/* Mobile Slide Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-white shadow-lg">
+          <ul className="flex flex-col gap-6 px-6 py-4 text-gray-700 text-base font-medium">
+            <li>
+              <a
+                href="#home"
+                onClick={closeMenu}
+                className="hover:text-yellow-600 transition"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="#products"
+                onClick={closeMenu}
+                className="hover:text-yellow-600 transition"
+              >
+                Products
+              </a>
+            </li>
+            <li>
+              <a
+                href="#whychooseus"
+                onClick={closeMenu}
+                className="hover:text-yellow-600 transition"
+              >
+                Why Choose Us
+              </a>
+            </li>
+            <li>
+              <a
+                href="#contact"
+                onClick={closeMenu}
+                className="hover:text-yellow-600 transition"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
     </header>
   );
 }
