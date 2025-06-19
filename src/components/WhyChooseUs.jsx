@@ -14,7 +14,7 @@ const backgroundImages = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="relative min-h-[500px] md:min-h-[600px] w-full overflow-hidden">
+    <section className="relative w-full overflow-hidden">
       {/* Background Slider */}
       <Swiper
         modules={[Autoplay]}
@@ -34,14 +34,16 @@ const WhyChooseUs = () => {
       </Swiper>
 
       {/* Content Overlay */}
-      <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-white text-center p-6 z-10">
-        <div className="max-w-6xl">
-          <h2 className="text-4xl font-extrabold mb-10">Why Choose Us?</h2>
+      <div className="relative bg-black/60 w-full py-16 px-4 text-white z-10">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-10">
+            Why Choose Us?
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 shadow-lg hover:scale-105 transition-all duration-300">
-              <FaCogs className="text-yellow-400 text-4xl mb-4 mx-auto" />
-              <h3 className="text-2xl font-bold mb-2">Features</h3>
-              <ul className="space-y-2 text-lg">
+              <FaCogs className="text-yellow-400 text-3xl md:text-4xl mb-4 mx-auto" />
+              <h3 className="text-xl md:text-2xl font-bold mb-2">Features</h3>
+              <ul className="space-y-2 text-base md:text-lg">
                 <li>🧪 High Quality Materials</li>
                 <li>⚖️ Consistent Strength</li>
                 <li>🎨 Smooth Finish Technology</li>
@@ -49,9 +51,9 @@ const WhyChooseUs = () => {
             </div>
 
             <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 shadow-lg hover:scale-105 transition-all duration-300">
-              <FaShieldAlt className="text-green-400 text-4xl mb-4 mx-auto" />
-              <h3 className="text-2xl font-bold mb-2">Benefits</h3>
-              <ul className="space-y-2 text-lg">
+              <FaShieldAlt className="text-green-400 text-3xl md:text-4xl mb-4 mx-auto" />
+              <h3 className="text-xl md:text-2xl font-bold mb-2">Benefits</h3>
+              <ul className="space-y-2 text-base md:text-lg">
                 <li>✅ Long-term Durability</li>
                 <li>💰 Cost Effective Solution</li>
                 <li>🌱 Eco-Friendly Composition</li>
@@ -59,9 +61,11 @@ const WhyChooseUs = () => {
             </div>
 
             <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 shadow-lg hover:scale-105 transition-all duration-300">
-              <FaHome className="text-pink-400 text-4xl mb-4 mx-auto" />
-              <h3 className="text-2xl font-bold mb-2">Applications</h3>
-              <ul className="space-y-2 text-lg">
+              <FaHome className="text-pink-400 text-3xl md:text-4xl mb-4 mx-auto" />
+              <h3 className="text-xl md:text-2xl font-bold mb-2">
+                Applications
+              </h3>
+              <ul className="space-y-2 text-base md:text-lg">
                 <li>🏗️ Residential Buildings</li>
                 <li>🏢 Commercial Projects</li>
                 <li>🏭 Industrial Constructions</li>
