@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FaStar } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { Autoplay } from "swiper/modules"; // ✅ This was missing
+import { Autoplay } from "swiper/modules";
 
 export default function Testimonials() {
   const reviews = [
@@ -39,7 +39,7 @@ export default function Testimonials() {
         className="text-4xl font-extrabold text-gray-800 mb-16"
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
         What Our Customers Say
@@ -53,7 +53,7 @@ export default function Testimonials() {
             className="bg-white rounded-3xl p-8 shadow-xl border hover:scale-105 transition-transform duration-500"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: index * 0.2 }}
+            transition={{ duration: 0.6, delay: index * 0.05 }}
             viewport={{ once: true }}
           >
             <div className="flex justify-center mb-6">
@@ -82,7 +82,7 @@ export default function Testimonials() {
       {/* Mobile Swiper View */}
       <div className="md:hidden max-w-md mx-auto">
         <Swiper
-          modules={[Autoplay]} // ✅ Now Autoplay enabled
+          modules={[Autoplay]}
           autoplay={{ delay: 2000, disableOnInteraction: false }}
           spaceBetween={20}
           slidesPerView={1}

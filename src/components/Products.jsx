@@ -56,7 +56,7 @@ export default function Applications() {
         className="text-4xl font-extrabold mb-16 text-gray-800"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.4 }}
         viewport={{ once: true }}
       >
         Applications of Magnum Lime Wash
@@ -67,9 +67,9 @@ export default function Applications() {
           <motion.div
             key={index}
             className="relative group backdrop-blur-lg rounded-xl overflow-hidden shadow-2xl border border-white/30 bg-white/30 transition-transform duration-500 cursor-pointer"
-            initial={{ opacity: 0, scale: 0.8, y: 30 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: index * 0.2 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
             whileHover={{ scale: 1.06, rotate: 0.5 }}
             viewport={{ once: true }}
           >
@@ -99,13 +99,9 @@ export default function Applications() {
             </div>
 
             {/* Bottom Ribbon */}
-            <motion.div
-              className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-yellow-500 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 p-3 text-white text-sm font-semibold tracking-wider shadow-inner"
-              initial={{ y: 50 }}
-              whileHover={{ y: 0 }}
-            >
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-yellow-500 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 p-3 text-white text-sm font-semibold tracking-wider shadow-inner">
               ⭐ PREMIUM QUALITY APPLICATION ⭐
-            </motion.div>
+            </div>
           </motion.div>
         ))}
       </div>
