@@ -14,7 +14,7 @@ const backgroundImages = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="relative w-full overflow-hidden">
+    <section id="whychooseus" className="relative w-full overflow-hidden">
       <Swiper
         modules={[Autoplay]}
         autoplay={{ delay: 2000, disableOnInteraction: false }}
