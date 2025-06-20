@@ -83,7 +83,7 @@ export default function Testimonials() {
           spaceBetween={20}
           slidesPerView={1}
           loop={true}
-          autoplay={{ delay: 2000 }}
+          autoplay={{ delay: 1000 }}
           className="w-full"
         >
           {reviews.map((review, index) => (
