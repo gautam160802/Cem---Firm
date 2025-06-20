@@ -5,7 +5,7 @@ export default function FloatingContactButtons() {
     {
       name: "WhatsApp",
       icon: "/assets/whatsapp.png",
-      url: "https://wa.me/919876543210",
+      url: "https://wa.me/9598808287",
       bgColor: "bg-green-500",
     },
     {
@@ -17,7 +17,7 @@ export default function FloatingContactButtons() {
     {
       name: "Call Us",
       icon: "/assets/phone.png",
-      url: "tel:+919876543210",
+      url: "tel:+9598808287",
       bgColor: "bg-yellow-500",
     },
   ];

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import indiaData from "../assets/indiaStatesCities.json";
 import { db } from "../firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
-import emailjs from "emailjs-com"; // <== Added EmailJS
+import emailjs from "emailjs-com";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -41,18 +41,15 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      // Store data in Firebase Firestore
       await addDoc(collection(db, "enquiries"), {
         ...formData,
         createdAt: Timestamp.now(),
       });
 
-      // Send email using EmailJS
       await emailjs.send(
-        "service_b0ersvj", // <-- your actual SERVICE ID
-        "template_8rbwdsr", // <-- your actual TEMPLATE ID
+        "service_b0ersvj",
+        "template_8rbwdsr",
         {
           name: formData.name,
           phone: formData.phone,
@@ -63,10 +60,10 @@ const Contact = () => {
           pincode: formData.pincode,
           message: formData.message,
         },
-        "XmgCc8xO0IdU1SJ7A" // <-- your actual Public Key (USER ID)
+        "XmgCc8xO0IdU1SJ7A"
       );
 
-      setSuccessMsg("🎉 Your enquiry has been sent successfully!");
+      setSuccessMsg("🎉 Your enquiry has been submitted successfully!");
       setFormData({
         name: "",
         phone: "",
@@ -80,160 +77,167 @@ const Contact = () => {
       setTimeout(() => setSuccessMsg(""), 4000);
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("❌ Something went wrong. Please try again later.");
+      alert("❌ Something went wrong. Please try again.");
     }
   };
 
   return (
-    <div className="bg-white py-12 px-4 sm:px-6 lg:px-16">
-      <h2 className="text-4xl font-bold text-center mb-10 text-gray-800">
-        Contact Us
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        {/* Left: Contact Info + Map */}
-        <div>
-          <h3 className="text-2xl font-semibold text-gray-700 mb-4">
-            Get in Touch
-          </h3>
-          <p className="mb-4 text-gray-600">
-            We are happy to help you with your cement needs across Uttar Pradesh
-            and Bihar. Please fill out the form and we’ll get back to you soon.
-          </p>
+    <section
+      id="contact"
+      className="py-24 bg-gradient-to-br from-white to-gray-100"
+    >
+      <div className="max-w-7xl mx-auto px-6">
+        <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-14">
+          Contact Us
+        </h2>
 
-          <div className="space-y-3 text-gray-600 mb-6">
-            <p>
-              <strong>Phone:</strong> +91-9876543210
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Left Side Info */}
+          <div className="bg-white rounded-lg shadow-lg p-8">
+            <h3 className="text-2xl font-bold text-gray-700 mb-6">
+              Get In Touch
+            </h3>
+            <p className="text-gray-500 mb-6">
+              Reach out to us for your White Lime Wash requirements. We're
+              serving across Uttar Pradesh, Bihar and PAN India.
             </p>
-            <p>
-              <strong>Email:</strong> info@gautamLime Wash.com
-            </p>
-            <p>
-              <strong>Address:</strong> PLOT NO.111, TIWARIGANJ, INDUSTRIAL
-              AREA, AYODHYA ROAD, LUCKNOW 226028 (U.P)
-            </p>
+            <div className="space-y-4 text-gray-600 text-lg">
+              <p>
+                <strong>📞 Phone:</strong> +91-9598808287
+              </p>
+              <p>
+                <strong>✉️ Email:</strong> info@gautamLimeWash.com
+              </p>
+              <p>
+                <strong>📍 Address:</strong> TIWARIGANJ, INDUSTRIAL AREA,
+                LUCKNOW (U.P)
+              </p>
+            </div>
+
+            <div className="mt-8">
+              <iframe
+                title="Map"
+                src="https://maps.google.com/maps?q=lucknow&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-64 rounded-lg shadow"
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
           </div>
 
-          <iframe
-            title="Lucknow Map"
-            src="https://maps.google.com/maps?q=lucknow&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            className="w-full h-64 border rounded shadow-md"
-            allowFullScreen=""
-            loading="lazy"
-          />
-        </div>
+          {/* Right Side Form */}
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white rounded-lg shadow-lg p-8 space-y-4"
+          >
+            <h3 className="text-2xl font-bold text-gray-700 text-center mb-6">
+              📝 Enquiry Form
+            </h3>
 
-        {/* Right: Enquiry Form */}
-        <form
-          onSubmit={handleSubmit}
-          className="bg-gray-50 p-6 rounded-lg shadow-md space-y-4"
-        >
-          <h3 className="text-xl font-bold text-gray-700 mb-4 text-center">
-            📝 Enquiry Form
-          </h3>
-
-          {successMsg && (
-            <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-              <div className="bg-green-600 text-white px-6 py-3 rounded shadow-lg text-lg flex items-center gap-2 animate-slide-down">
-                ✅ {successMsg}
+            {successMsg && (
+              <div className="bg-green-500 text-white py-3 px-6 rounded text-center font-medium shadow">
+                {successMsg}
               </div>
-            </div>
-          )}
+            )}
 
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Your Name"
-            className="w-full px-4 py-2 border rounded"
-            required
-          />
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="Phone Number"
-            className="w-full px-4 py-2 border rounded"
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Email Address"
-            className="w-full px-4 py-2 border rounded"
-          />
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Your Name"
+              className="w-full p-3 border rounded-lg"
+              required
+            />
 
-          <select
-            name="state"
-            value={formData.state}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded"
-            required
-          >
-            <option value="">Select State</option>
-            {indiaData.map((item, idx) => (
-              <option key={idx} value={item.state}>
-                {item.state}
-              </option>
-            ))}
-          </select>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="Phone Number"
+              className="w-full p-3 border rounded-lg"
+              required
+            />
 
-          <select
-            name="district"
-            value={formData.district}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded"
-            required
-          >
-            <option value="">Select District</option>
-            {districts.map((district, idx) => (
-              <option key={idx} value={district}>
-                {district}
-              </option>
-            ))}
-          </select>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email Address"
+              className="w-full p-3 border rounded-lg"
+            />
 
-          <input
-            type="text"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            placeholder="City"
-            className="w-full px-4 py-2 border rounded"
-            required
-          />
+            <select
+              name="state"
+              value={formData.state}
+              onChange={handleChange}
+              className="w-full p-3 border rounded-lg"
+              required
+            >
+              <option value="">Select State</option>
+              {indiaData.map((item, idx) => (
+                <option key={idx} value={item.state}>
+                  {item.state}
+                </option>
+              ))}
+            </select>
 
-          <input
-            type="text"
-            name="pincode"
-            value={formData.pincode}
-            onChange={handleChange}
-            placeholder="Pincode"
-            className="w-full px-4 py-2 border rounded"
-            required
-          />
+            <select
+              name="district"
+              value={formData.district}
+              onChange={handleChange}
+              className="w-full p-3 border rounded-lg"
+              required
+            >
+              <option value="">Select District</option>
+              {districts.map((district, idx) => (
+                <option key={idx} value={district}>
+                  {district}
+                </option>
+              ))}
+            </select>
 
-          <textarea
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            rows={3}
-            placeholder="Your Message"
-            className="w-full px-4 py-2 border rounded"
-          />
+            <input
+              type="text"
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              placeholder="City"
+              className="w-full p-3 border rounded-lg"
+              required
+            />
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-          >
-            Submit Enquiry
-          </button>
-        </form>
+            <input
+              type="text"
+              name="pincode"
+              value={formData.pincode}
+              onChange={handleChange}
+              placeholder="Pincode"
+              className="w-full p-3 border rounded-lg"
+              required
+            />
+
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              rows={4}
+              placeholder="Your Message"
+              className="w-full p-3 border rounded-lg resize-none"
+            />
+
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold py-3 rounded-lg shadow-md hover:scale-105 transition-all"
+            >
+              Submit Enquiry
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
