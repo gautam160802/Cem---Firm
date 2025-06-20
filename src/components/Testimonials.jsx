@@ -1,115 +1,121 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import { motion as _motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { FaStar } from "react-icons/fa";
-
-const testimonials = [
-  {
-    name: "Gautam Kumar",
-    text: "Magnum Lime Wash delivered beyond expectations. My clients praised the strength and finish.",
-    image: "https://randomuser.me/api/portraits/men/75.jpg",
-    company: "Kumar Constructions",
-    logo: "https://cdn-icons-png.flaticon.com/512/5968/5968705.png",
-    rating: 5,
-  },
-  {
-    name: "Ravi Kant Singh",
-    text: "Quality and reliability define Magnum. Always on time and never a complaint.",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-    company: "Singh Infrastructure",
-    logo: "https://cdn-icons-png.flaticon.com/512/619/619034.png",
-    rating: 5,
-  },
-  {
-    name: "Pooja Sharma",
-    text: "Used for multiple housing projects. Magnum’s consistency and price make it unbeatable.",
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
-    company: "Sharma Developers",
-    logo: "https://cdn-icons-png.flaticon.com/512/1042/1042344.png",
-    rating: 4,
-  },
-  {
-    name: "Akash Mehta",
-    text: "Every structure we’ve built using Magnum has stood the test of time. Highly recommended.",
-    image: "https://randomuser.me/api/portraits/men/55.jpg",
-    company: "Mehta Builders",
-    logo: "https://cdn-icons-png.flaticon.com/512/921/921347.png",
-    rating: 5,
-  },
-  {
-    name: "Nisha Verma",
-    text: "Magnum’s Lime Wash mix has the perfect balance. It’s our top pick for residential projects.",
-    image: "https://randomuser.me/api/portraits/women/68.jpg",
-    company: "Verma & Co.",
-    logo: "https://cdn-icons-png.flaticon.com/512/3523/3523885.png",
-    rating: 4,
-  },
-];
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 export default function Testimonials() {
+  const reviews = [
+    {
+      name: "Amit Sharma",
+      position: "Civil Contractor, Uttar Pradesh",
+      quote:
+        "Magnum Lime Wash completely changed my building projects. The smoothness and whiteness are unmatched. My clients love the results!",
+      image: "/images/testimonials/client1.jpg",
+    },
+    {
+      name: "Pooja Mehta",
+      position: "Interior Designer, Bihar",
+      quote:
+        "I always recommend Magnum Lime Wash for luxury interiors. The finish is beautiful, durable, and truly premium.",
+      image: "/images/testimonials/client2.jpg",
+    },
+    {
+      name: "Vikram Singh",
+      position: "Real Estate Developer",
+      quote:
+        "We use Magnum Lime Wash across all our projects now. Best quality, best service, and it elevates the entire look of our buildings.",
+      image: "/images/testimonials/client3.jpg",
+    },
+  ];
+
   return (
     <section
+      className="py-24 bg-gradient-to-r from-white via-yellow-50 to-white text-center"
       id="testimonials"
-      className="py-20 px-6 bg-gray-100 dark:bg-gray-800"
     >
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-3">
-          💬 What Our Clients Say
-        </h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-12">
-          Trusted by builders and contractors nationwide — here's what they have
-          to say about Magnum Lime Wash.
-        </p>
+      <motion.h2
+        className="text-4xl font-extrabold text-gray-800 mb-16"
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        What Our Customers Say
+      </motion.h2>
 
+      <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto px-6">
+        {reviews.map((review, index) => (
+          <motion.div
+            key={index}
+            className="bg-white rounded-3xl p-8 shadow-xl border hover:scale-105 transition-transform duration-500"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: index * 0.2 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex justify-center mb-6">
+              <img
+                src={review.image}
+                alt={review.name}
+                className="w-24 h-24 rounded-full border-4 border-yellow-500 shadow-md object-cover"
+              />
+            </div>
+            <h3 className="text-xl font-bold text-gray-700">{review.name}</h3>
+            <p className="text-sm text-yellow-600 font-semibold mb-2">
+              {review.position}
+            </p>
+            <div className="flex justify-center mb-4">
+              {[...Array(5)].map((_, i) => (
+                <FaStar key={i} className="text-yellow-400 text-lg" />
+              ))}
+            </div>
+            <p className="text-gray-600 leading-relaxed text-sm">
+              {review.quote}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Mobile Swiper */}
+      <div className="md:hidden max-w-md mx-auto">
         <Swiper
-          modules={[Pagination, Autoplay]}
-          spaceBetween={40}
+          spaceBetween={20}
           slidesPerView={1}
-          loop={testimonials.length > 1}
-          autoplay={{ delay: 4000, disableOnInteraction: false }}
-          pagination={{ clickable: true }}
+          loop={true}
+          autoplay={{ delay: 2000 }}
           className="w-full"
         >
-          {testimonials.map((t, i) => (
-            <SwiperSlide key={`testimonial-${i}`}>
-              <_motion.div
-                className="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-xl text-center max-w-xl mx-auto"
-                initial={{ opacity: 0, y: 40 }}
+          {reviews.map((review, index) => (
+            <SwiperSlide key={index}>
+              <motion.div
+                className="bg-white rounded-3xl p-8 shadow-xl border mx-4"
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
               >
-                {t.image && (
+                <div className="flex justify-center mb-6">
                   <img
-                    src={t.image}
-                    alt={t.name}
-                    className="mx-auto w-24 h-24 rounded-full mb-4 object-cover border-4 border-yellow-500 shadow-md"
+                    src={review.image}
+                    alt={review.name}
+                    className="w-24 h-24 rounded-full border-4 border-yellow-500 shadow-md object-cover"
                   />
-                )}
-
-                <div className="flex justify-center mb-2">
-                  {[...Array(t.rating)].map((_, index) => (
-                    <FaStar key={index} className="text-yellow-500 text-lg" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-700">
+                  {review.name}
+                </h3>
+                <p className="text-sm text-yellow-600 font-semibold mb-2">
+                  {review.position}
+                </p>
+                <div className="flex justify-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <FaStar key={i} className="text-yellow-400 text-lg" />
                   ))}
                 </div>
-
-                <p className="text-gray-700 dark:text-gray-300 italic text-lg leading-relaxed mb-4">
-                  “{t.text}”
+                <p className="text-gray-600 leading-relaxed text-sm">
+                  {review.quote}
                 </p>
-
-                <h4 className="text-xl font-semibold text-gray-800 dark:text-yellow-400">
-                  {t.name}
-                </h4>
-                <div className="flex items-center justify-center gap-2 mt-2">
-                  <img src={t.logo} alt="company logo" className="w-6 h-6" />
-                  <span className="text-sm text-gray-600 dark:text-gray-400">
-                    {t.company}
-                  </span>
-                </div>
-              </_motion.div>
+              </motion.div>
             </SwiperSlide>
           ))}
         </Swiper>

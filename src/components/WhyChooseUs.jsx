@@ -17,7 +17,7 @@ const WhyChooseUs = () => {
     <section className="relative w-full overflow-hidden">
       <Swiper
         modules={[Autoplay]}
-        autoplay={{ delay: 1500, disableOnInteraction: false }}
+        autoplay={{ delay: 2000, disableOnInteraction: false }}
         speed={800}
         loop={true}
         className="absolute inset-0 z-0"
