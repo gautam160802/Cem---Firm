@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FaStar } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { Autoplay } from "swiper/modules"; // ✅ This was missing
 
 export default function Testimonials() {
   const reviews = [
@@ -44,6 +45,7 @@ export default function Testimonials() {
         What Our Customers Say
       </motion.h2>
 
+      {/* Desktop View */}
       <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto px-6">
         {reviews.map((review, index) => (
           <motion.div
@@ -77,13 +79,14 @@ export default function Testimonials() {
         ))}
       </div>
 
-      {/* Mobile Swiper */}
+      {/* Mobile Swiper View */}
       <div className="md:hidden max-w-md mx-auto">
         <Swiper
+          modules={[Autoplay]} // ✅ Now Autoplay enabled
+          autoplay={{ delay: 2000, disableOnInteraction: false }}
           spaceBetween={20}
           slidesPerView={1}
           loop={true}
-          autoplay={{ delay: 1000 }}
           className="w-full"
         >
           {reviews.map((review, index) => (

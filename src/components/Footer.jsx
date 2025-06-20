@@ -73,22 +73,6 @@ export default function Footer() {
         </div>
 
         {/* Contact Info */}
-        <div>
-          <h3 className="text-xl font-bold mb-4 text-white">Get in Touch</h3>
-          <div className="space-y-3 text-gray-400 text-base">
-            <p className="flex items-center gap-2">
-              <FaPhoneAlt className="text-yellow-400" /> +91-9598808287
-            </p>
-            <p className="flex items-center gap-2">
-              <FaEnvelope className="text-yellow-400" /> info@magnumlime.com
-            </p>
-            <p className="flex items-start gap-2">
-              <FaMapMarkerAlt className="text-yellow-400 mt-1" />
-              PLOT NO.111, TIWARIGANJ, INDUSTRIAL AREA, AYODHYA ROAD, LUCKNOW
-              226028 (U.P)
-            </p>
-          </div>
-        </div>
       </div>
 
       {/* Bottom Bar */}
